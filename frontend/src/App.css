@@ -1,0 +1,365 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --paper: #faf8f3;
+  --paper-deep: #f1ece1;
+  --ink: #23211d;
+  --ink-soft: #55503f;
+  --muted: #8a8478;
+  --line: #ddd6c7;
+  --accent: #3f6357;
+  --accent-soft: #e4ece9;
+  --error: #a3402f;
+  --error-soft: #f6e6e1;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+#root {
+  height: 100vh;
+}
+
+.app-shell {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ---------- Brand header (shown when no doc selected, and small in sidebar) ---------- */
+.brand {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* ---------- Sidebar ---------- */
+.sidebar {
+  width: 300px;
+  min-width: 300px;
+  background: var(--paper-deep);
+  border-right: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.sidebar-header {
+  padding: 24px 20px 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.sidebar-header .brand {
+  font-size: 22px;
+  color: var(--ink);
+}
+
+.sidebar-header .tagline {
+  margin-top: 4px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.upload-area {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.upload-btn {
+  width: 100%;
+  padding: 10px 14px;
+  background: var(--ink);
+  color: var(--paper);
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.upload-btn:hover {
+  background: var(--accent);
+}
+
+.upload-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.upload-hint {
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.upload-error {
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--error);
+  background: var(--error-soft);
+  padding: 8px 10px;
+}
+
+.doc-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 12px;
+}
+
+.doc-list-empty {
+  padding: 24px 12px;
+  color: var(--muted);
+  font-size: 13px;
+  text-align: center;
+}
+
+.doc-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 10px;
+  cursor: pointer;
+  border-left: 3px solid transparent;
+  margin-bottom: 2px;
+}
+
+.doc-item:hover {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.doc-item.active {
+  background: var(--accent-soft);
+  border-left-color: var(--accent);
+}
+
+.doc-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.doc-meta {
+  flex: 1;
+  min-width: 0;
+}
+
+.doc-name {
+  font-size: 13.5px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.doc-sub {
+  font-size: 11.5px;
+  color: var(--muted);
+  margin-top: 1px;
+}
+
+.doc-sub.status-processing {
+  color: var(--accent);
+}
+
+.doc-sub.status-failed {
+  color: var(--error);
+}
+
+.doc-delete {
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 13px;
+  padding: 4px 6px;
+  opacity: 0;
+}
+
+.doc-item:hover .doc-delete {
+  opacity: 1;
+}
+
+.doc-delete:hover {
+  color: var(--error);
+}
+
+/* ---------- Chat panel ---------- */
+.chat-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-width: 0;
+}
+
+.chat-empty-state {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  text-align: center;
+  padding: 40px;
+}
+
+.chat-empty-state .brand {
+  font-size: 32px;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.chat-empty-state p {
+  max-width: 340px;
+  font-size: 14px;
+}
+
+.chat-header {
+  padding: 18px 28px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.chat-header .doc-name {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 17px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chat-header .doc-pages {
+  font-size: 12.5px;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.messages-empty {
+  color: var(--muted);
+  font-size: 14px;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.message-row {
+  display: flex;
+}
+
+.message-row.user {
+  justify-content: flex-end;
+}
+
+.message-row.assistant {
+  justify-content: flex-start;
+}
+
+.message-bubble {
+  max-width: 68%;
+  padding: 12px 15px;
+  font-size: 14.5px;
+  line-height: 1.55;
+  white-space: pre-wrap;
+}
+
+.message-row.user .message-bubble {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.message-row.assistant .message-bubble {
+  background: var(--paper-deep);
+  color: var(--ink);
+  border: 1px solid var(--line);
+}
+
+.sources {
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.source-pill {
+  font-size: 11.5px;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 3px 8px;
+  border: 1px solid transparent;
+}
+
+.thinking {
+  color: var(--muted);
+  font-size: 13.5px;
+  font-style: italic;
+}
+
+.chat-error {
+  color: var(--error);
+  background: var(--error-soft);
+  padding: 10px 15px;
+  font-size: 13.5px;
+  margin: 0 28px 12px;
+}
+
+.chat-input-area {
+  border-top: 1px solid var(--line);
+  padding: 16px 28px 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.chat-input-area textarea {
+  flex: 1;
+  resize: none;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.4;
+  min-height: 44px;
+  max-height: 140px;
+}
+
+.chat-input-area textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.send-btn {
+  padding: 0 20px;
+  background: var(--accent);
+  color: var(--paper);
+  border: none;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.send-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}

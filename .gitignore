@@ -1,0 +1,19 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+.env
+
+# Storage (runtime data, not source)
+backend/storage/uploads/*
+backend/storage/indexes/*
+!backend/storage/uploads/.gitkeep
+!backend/storage/indexes/.gitkeep
+backend/storage/docuchat.db
+
+# Node
+node_modules/
+frontend/dist/
+
+# OS
+.DS_Store
