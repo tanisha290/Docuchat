@@ -2,6 +2,8 @@
 
 A conversational document QA system using RAG where users upload PDFs and ask multi-turn questions about their contents. The system extracts and chunks the document, generates embeddings, stores them in FAISS, retrieves the most relevant chunks per query, and provides that context plus conversation history to Gemini to generate grounded, cited answers.
 
+**Live Demo:** https://docuchat-y8h3.onrender.com/
+
 ## Architecture
 
 ```
